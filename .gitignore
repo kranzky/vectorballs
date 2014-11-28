@@ -1,0 +1,3 @@
+bin/vectorballs
+object/*.o
+*swp
