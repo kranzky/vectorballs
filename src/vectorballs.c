@@ -21,23 +21,6 @@ int main(int argc, const char *argv[])
     return 1;
   }
 
-  // TODO: draw and move a sprite
-  // TODO: add checkerboard plane
-  // TODO: colourise sprite
-  // TODO: scale sprite
-  // TODO: move sprite in a circle
-  // TODO: add a shadow on the plane
-  // TODO: fade with distance
-  // TODO: input controls
-  // TODO: move the camera
-  // TODO: add FPS display
-  // TODO: add a second sprite with depth culling
-  // TODO: test how many at 60fps
-  // TODO: basic collisions between sprites
-  // TODO: aggregate objects that move together
-  // TODO: object rotation
-  // TODO: build on windows and linux
-
   vb_game_run(&game, tex);
   vb_game_free(&game);
 
