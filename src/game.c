@@ -53,6 +53,7 @@ vb_game_run(VB_Game *game, SDL_Texture *tex)
         quit = true;
       }
     }
+    SDL_SetRenderDrawColor(game->view.renderer, 255, 0, 0, 255);
     SDL_RenderClear(game->view.renderer);
     SDL_RenderCopy(game->view.renderer, tex, NULL, &dst);
     SDL_RenderPresent(game->view.renderer);

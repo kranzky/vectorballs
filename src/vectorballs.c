@@ -13,7 +13,7 @@ int main(int argc, const char *argv[])
     return 1;
   }
 
-  SDL_Texture *tex = IMG_LoadTexture(game.view.renderer, "assets/avatar.jpg");
+  SDL_Texture *tex = IMG_LoadTexture(game.view.renderer, "assets/checkerboard.jpg");
   if (tex == NULL)
   {
     fprintf(stderr, "SDL_CreateTextureFromSurface Error: %s\n", SDL_GetError());
