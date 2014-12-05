@@ -36,7 +36,7 @@ void
 vb_ground_update(VB_Ground *ground)
 {
   float h = -80000;
-  for (int z = 10000; z > 0; --z)
+  for (int z = 10000; z > 0; z-=1)
   {
     int y = (int)(h/(1.0+(float)z));
     if (y<=-450 || y> 450)
@@ -60,15 +60,11 @@ vb_ground_render(VB_View *view, VB_Ground *ground)
     {
       continue;
     }
-    src.y = (int)ground->raster[y].z % 256;
-    dst.y = y;
     dst.w = 100000 / ground->raster[y].z;
-    dst.x = 0;
-    do
-    {
-      SDL_RenderCopy(view->renderer, ground->tex, &src, &dst);
-      dst.x += dst.w;
-    }
-    while (dst.x < 1600);
+    src.x = 0;
+    src.y = (int)ground->raster[y].z % 256;
+    dst.x = 800-dst.w/2.0;
+    dst.y = y;
+    SDL_RenderCopy(view->renderer, ground->tex, &src, &dst);
   }
 }
