@@ -1,88 +1,64 @@
 #include "game.h"
 
-bool
+SDL_bool
 vb_game_isok(VB_Game *game)
 {
-  return vb_view_isok(&game->view);
+  return vb_view_isok(&game->view) &&
+         vb_ground_isok(&game->ground);
 }
 
-bool
+SDL_bool
 vb_game_init(VB_Game *game)
 {
-  // TODO: check view
   if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
   {
-    return false; 
+    return SDL_FALSE; 
   }
+
   SDL_ShowCursor(SDL_FALSE);
   SDL_DisableScreenSaver();
-  return vb_view_init(&game->view);
+
+  return vb_view_init(&game->view) &&
+         vb_ground_init(&game->view, &game->ground);
 }
 
 void
 vb_game_free(VB_Game *game)
 {
   vb_view_free(&game->view);
+  vb_ground_free(&game->ground);
   SDL_Quit();
 }
 
 void
-vb_game_run(VB_Game *game, SDL_Texture *tex)
+vb_game_run(VB_Game *game)
 {
   SDL_ShowWindow(game->view.window);
 
   SDL_Event e;
-  bool quit = false;   
+  SDL_bool quit = SDL_FALSE;   
   while (!quit)
   {
     while (SDL_PollEvent(&e))
     {
       if (e.type == SDL_QUIT)
       {
-        quit = true;
+        quit = SDL_TRUE;
       }
       if (e.type == SDL_KEYDOWN)
       {
-        quit = true;
+        quit = SDL_TRUE;
       }
       if (e.type == SDL_MOUSEBUTTONDOWN)
       {
-        quit = true;
+        quit = SDL_TRUE;
       }
     }
 
     SDL_SetRenderDrawColor(game->view.renderer, 255, 0, 0, 255);
     SDL_RenderClear(game->view.renderer);
 
-    SDL_Rect src;
-    src.x = 0;
-    src.y = 0;
-    src.w = 256;
-    src.h = 1;
-
-    SDL_Rect dst;
-    dst.x = 0;
-    dst.y = 0;
-    dst.w = 256;
-    dst.h = 1;
-
-    int h = -80000;
-    for (int y = 450; y > -450; y -= 1)
-    {
-      int z = (y == 0) ? -1 : (h - y)/y;
-      if (z > 0 && z < 10000) {
-        src.y = z % 256;
-        dst.y = 450 - y;
-        dst.w = 100000 / z;
-        dst.x = 0;
-        do
-        {
-          SDL_RenderCopy(game->view.renderer, tex, &src, &dst);
-          dst.x += dst.w;
-        }
-        while (dst.x < 1600);
-      }
-    }
+    vb_ground_render(&game->view, &game->ground);    
 
     SDL_RenderPresent(game->view.renderer);
   }

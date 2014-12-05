@@ -1,5 +1,3 @@
-#include <SDL2_image/SDL_image.h>
-
 #include "game.h"
 
 int main(int argc, const char *argv[])
@@ -13,15 +11,7 @@ int main(int argc, const char *argv[])
     return 1;
   }
 
-  SDL_Texture *tex = IMG_LoadTexture(game.view.renderer, "assets/checkerboard.jpg");
-  if (tex == NULL)
-  {
-    fprintf(stderr, "SDL_CreateTextureFromSurface Error: %s\n", SDL_GetError());
-    vb_game_free(&game);
-    return 1;
-  }
-
-  vb_game_run(&game, tex);
+  vb_game_run(&game);
   vb_game_free(&game);
 
   return 0;

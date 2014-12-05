@@ -1,17 +1,15 @@
-#include <stdbool.h>
-
 #include <SDL2/SDL.h>
 #include <SDL2_image/SDL_image.h>
 
 #include "view.h"
 
-bool
+SDL_bool
 vb_view_isok(VB_View *view)
 {
-  return view->window && view->renderer;
+  return (view->window != NULL) && (view->renderer != NULL);
 }
 
-bool
+SDL_bool
 vb_view_init(VB_View *view)
 {
   //view->window = SDL_CreateWindow("=== V E C T O R B A L L S ===", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1600, 900, SDL_WINDOW_FULLSCREEN | SDL_WINDOW_HIDDEN);
