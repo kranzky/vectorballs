@@ -15,6 +15,12 @@ typedef struct
     float gradient;
   }
   raster[900];
+  struct
+  {
+    float z;
+    float height;
+  }
+  points[1000];
 }
 VB_Ground;
 
