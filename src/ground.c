@@ -36,10 +36,14 @@ void
 vb_ground_update(VB_Ground *ground)
 {
   float h = -80000;
-  for (int y = 450; y > -450; y -= 1)
+  for (int z = 10000; z > 0; --z)
   {
-    float z = (y == 0) ? -1 : (h - (float)y)/(float)y;
-    ground->raster[450-y].z = z;
+    int y = (int)(h/(1.0+(float)z));
+    if (y<=-450 || y> 450)
+    {
+      continue;
+    }
+    ground->raster[450-y].z = (float)z;
     ground->raster[450-y].height = (float)h;
   }
 }

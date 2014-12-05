@@ -1,7 +1,4 @@
 * algorithm thoughts
-  + we want to find, for each raster line, the height, z-distance,
-    ground-distance and slope/normal of the terrain; allocate an array of
-    structures, one member for each raster line (this is the z-map)
   + we assume the terrain is a continuous line, so raycasting to find an
     intersection can be an expensive operation
   + instead, represent the terrain as a discrete series of heights, and raycast
