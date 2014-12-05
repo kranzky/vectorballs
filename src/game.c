@@ -15,9 +15,6 @@ vb_game_init(VB_Game *game)
     return SDL_FALSE; 
   }
 
-  SDL_ShowCursor(SDL_FALSE);
-  SDL_DisableScreenSaver();
-
   return vb_view_init(&game->view) &&
          vb_ground_init(&game->view, &game->ground);
 }
@@ -58,6 +55,7 @@ vb_game_run(VB_Game *game)
     SDL_SetRenderDrawColor(game->view.renderer, 255, 0, 0, 255);
     SDL_RenderClear(game->view.renderer);
 
+    vb_ground_update(&game->ground);    
     vb_ground_render(&game->view, &game->ground);    
 
     SDL_RenderPresent(game->view.renderer);
