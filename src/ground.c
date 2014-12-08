@@ -1,17 +1,24 @@
-#include <SDL2_image/SDL_image.h>
-
-#include <math.h>
 #include "ground.h"
 
-SDL_bool
-vb_ground_isok(VB_Ground *ground)
-{
-  return ground->tex != NULL;
-}
+#include <SDL2_image/SDL_image.h>
+#include <math.h>
 
-SDL_bool
-vb_ground_init(VB_View *view, VB_Ground *ground)
+VB_Ground *
+vb_ground_init(VB_View *view)
 {
+  VB_Ground *ground = malloc(sizeof(VB_Ground));
+  if (ground == NULL)
+  {
+    return NULL;
+  }
+
+  ground->tex = IMG_LoadTexture(view->renderer, "assets/checkerboard.jpg");
+  if (ground->tex == NULL)
+  {
+    vb_ground_free(ground);
+    return NULL;
+  }
+
   for (int y = 0; y < 900; ++y)
   {
     ground->raster[y].z = 0.0;
@@ -19,23 +26,26 @@ vb_ground_init(VB_View *view, VB_Ground *ground)
     ground->raster[y].height = 0.0;
     ground->raster[y].gradient = 0.0;
   }
+
   for (int i = 0; i < 1000; ++i)
   {
     ground->points[i].z = i*10.0;
     ground->points[i].height = 10000.0*sin((float)i/10.0)-50000.0;
   }
-  ground->tex = IMG_LoadTexture(view->renderer, "assets/checkerboard.jpg");
-  return vb_ground_isok(ground);
+
+  return ground;
 }
 
 void
 vb_ground_free(VB_Ground *ground)
 {
-  if (ground->tex)
+  if (ground->tex != NULL)
   {
-    // TODO: free tex
+    SDL_DestroyTexture(ground->tex);
     ground->tex = NULL;
   }
+
+  free(ground);
 }
 
 void
@@ -44,7 +54,7 @@ vb_ground_update(VB_Ground *ground)
   for (int i = 999; i >= 0; --i)
   {
     int y = (int)(ground->points[i].height/(1.0+ground->points[i].z));
-    if (y<=-450 || y> 450)
+    if (y <= -450 || y > 450)
     {
       continue;
     }

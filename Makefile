@@ -17,7 +17,7 @@ clean:
 	-@rm -f ${OBJECTS} $(TARGETS:%=object/%.o) ${TARGETS}
 
 grind: ${TARGETS}
-	-@valgrind --dsymutil=yes ${TARGETS}
+	-@valgrind --dsymutil=yes --leak-check=full --track-origins=yes ${TARGETS}
 
 object/%.o: src/%.c ${HEADERS}
 	@echo "Compiling $<"

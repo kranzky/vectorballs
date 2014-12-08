@@ -2,17 +2,23 @@
 
 int main(int argc, const char *argv[])
 {
-  VB_Game game;
-
-  if (!vb_game_init(&game))
+  if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
   {
-    fprintf(stderr, "vb_game_init Error: %s\n", SDL_GetError());
-    vb_game_free(&game);
     return 1;
   }
 
-  vb_game_run(&game);
-  vb_game_free(&game);
+  VB_Game *game = vb_game_init();
+  if (game == NULL)
+  {
+    fprintf(stderr, "vb_game_init Error: %s\n", SDL_GetError());
+    SDL_Quit();
+    return 1;
+  }
+
+  vb_game_run(game);
+  vb_game_free(game);
+
+  SDL_Quit();
 
   return 0;
 }

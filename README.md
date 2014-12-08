@@ -1,4 +1,5 @@
 * TODO
+  + switch over to strictly allocating memory
   + calculate slope, only draw +ve slope
   + sort by z before drawing
   + calculate g for control points, use for texture

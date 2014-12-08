@@ -1,36 +1,53 @@
 #include "game.h"
 
-SDL_bool
-vb_game_isok(VB_Game *game)
+VB_Game *
+vb_game_init()
 {
-  return vb_view_isok(&game->view) &&
-         vb_ground_isok(&game->ground);
-}
-
-SDL_bool
-vb_game_init(VB_Game *game)
-{
-  if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
+  VB_Game *game = malloc(sizeof(VB_Game));
+  if (game == NULL)
   {
-    return SDL_FALSE; 
+    return NULL;
   }
 
-  return vb_view_init(&game->view) &&
-         vb_ground_init(&game->view, &game->ground);
+  game->view = vb_view_init();
+  if (game->view == NULL)
+  {
+    vb_game_free(game);
+    return NULL;
+  }
+
+  game->ground = vb_ground_init(game->view);
+  if (game->ground == NULL)
+  {
+    vb_game_free(game);
+    return NULL;
+  }
+
+  return game;
 }
 
 void
 vb_game_free(VB_Game *game)
 {
-  vb_view_free(&game->view);
-  vb_ground_free(&game->ground);
-  SDL_Quit();
+  if (game->view != NULL)
+  {
+    vb_view_free(game->view);
+    game->view = NULL;
+  }
+
+  if (game->ground != NULL)
+  {
+    vb_ground_free(game->ground);
+    game->ground = NULL;
+  }
+
+  free(game);
 }
 
 void
 vb_game_run(VB_Game *game)
 {
-  SDL_ShowWindow(game->view.window);
+  SDL_ShowWindow(game->view->window);
 
   SDL_Event e;
   SDL_bool quit = SDL_FALSE;   
@@ -52,12 +69,12 @@ vb_game_run(VB_Game *game)
       }
     }
 
-    SDL_SetRenderDrawColor(game->view.renderer, 255, 0, 0, 255);
-    SDL_RenderClear(game->view.renderer);
+    SDL_SetRenderDrawColor(game->view->renderer, 255, 0, 0, 255);
+    SDL_RenderClear(game->view->renderer);
 
-    vb_ground_update(&game->ground);    
-    vb_ground_render(&game->view, &game->ground);    
+    vb_ground_update(game->ground);    
+    vb_ground_render(game->view, game->ground);    
 
-    SDL_RenderPresent(game->view.renderer);
+    SDL_RenderPresent(game->view->renderer);
   }
 }

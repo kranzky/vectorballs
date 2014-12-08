@@ -10,8 +10,7 @@ typedef struct
 }
 VB_View;
 
-SDL_bool vb_view_isok(VB_View *view);
-SDL_bool vb_view_init(VB_View *view);
+VB_View * vb_view_init();
 void vb_view_free(VB_View *view);
 
 #endif
