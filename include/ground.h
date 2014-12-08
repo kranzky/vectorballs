@@ -3,6 +3,8 @@
 
 #include "view.h"
 
+#define DEPTH 1000
+
 typedef struct
 {
   SDL_Texture *tex;
@@ -13,13 +15,13 @@ typedef struct
     float height;
     float gradient;
   }
-  raster[900];
+  raster[HEIGHT];
   struct
   {
     float z;
     float height;
   }
-  points[1000];
+  points[DEPTH];
 }
 VB_Ground;
 

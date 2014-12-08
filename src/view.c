@@ -12,8 +12,8 @@ vb_view_init()
     return NULL;
   }
 
-  //view->window = SDL_CreateWindow("=== V E C T O R B A L L S ===", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1600, 900, SDL_WINDOW_FULLSCREEN | SDL_WINDOW_HIDDEN);
-  view->window = SDL_CreateWindow("=== V E C T O R B A L L S ===", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1600, 900, SDL_WINDOW_HIDDEN);
+  //view->window = SDL_CreateWindow("=== V E C T O R B A L L S ===", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, SDL_WINDOW_FULLSCREEN | SDL_WINDOW_HIDDEN);
+  view->window = SDL_CreateWindow("=== V E C T O R B A L L S ===", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, SDL_WINDOW_HIDDEN);
   if (view->window == NULL)
   {
     vb_view_free(view);

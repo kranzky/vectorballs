@@ -1,6 +1,7 @@
 #include "game.h"
 
-int main(int argc, const char *argv[])
+int
+main(int argc, const char *argv[])
 {
   if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
   {

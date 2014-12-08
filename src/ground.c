@@ -1,7 +1,7 @@
 #include "ground.h"
 
-#include <SDL2_image/SDL_image.h>
 #include <math.h>
+#include <SDL2_image/SDL_image.h>
 
 VB_Ground *
 vb_ground_init(VB_View *view)
@@ -19,7 +19,7 @@ vb_ground_init(VB_View *view)
     return NULL;
   }
 
-  for (int y = 0; y < 900; ++y)
+  for (int y = 0; y < HEIGHT; ++y)
   {
     ground->raster[y].z = 0.0;
     ground->raster[y].distance = 0.0;
@@ -27,7 +27,7 @@ vb_ground_init(VB_View *view)
     ground->raster[y].gradient = 0.0;
   }
 
-  for (int i = 0; i < 1000; ++i)
+  for (int i = 0; i < DEPTH; ++i)
   {
     ground->points[i].z = i*10.0;
     ground->points[i].height = 10000.0*sin((float)i/10.0)-50000.0;
@@ -69,7 +69,7 @@ vb_ground_render(VB_View *view, VB_Ground *ground)
   SDL_Rect src = {0, 0, 256, 1};
   SDL_Rect dst = {0, 0, 256, 1};
 
-  for (int y = 0; y < 900; ++y)
+  for (int y = 0; y < HEIGHT; ++y)
   {
     if (ground->raster[y].z <= 0.0 || ground->raster[y].z >= 10000.0)
     {
