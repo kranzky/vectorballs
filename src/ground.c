@@ -1,7 +1,11 @@
+//==============================================================================
+
 #include "ground.h"
 
 #include <math.h>
 #include <SDL2_image/SDL_image.h>
+
+//------------------------------------------------------------------------------
 
 VB_Ground *
 vb_ground_init(VB_View *view)
@@ -36,6 +40,8 @@ vb_ground_init(VB_View *view)
   return ground;
 }
 
+//------------------------------------------------------------------------------
+
 void
 vb_ground_free(VB_Ground *ground)
 {
@@ -47,6 +53,8 @@ vb_ground_free(VB_Ground *ground)
 
   free(ground);
 }
+
+//------------------------------------------------------------------------------
 
 void
 vb_ground_update(VB_Ground *ground)
@@ -62,6 +70,8 @@ vb_ground_update(VB_Ground *ground)
     ground->raster[450-y].height = ground->points[i].height;
   }
 }
+
+//------------------------------------------------------------------------------
 
 void
 vb_ground_render(VB_View *view, VB_Ground *ground)
@@ -83,3 +93,5 @@ vb_ground_render(VB_View *view, VB_Ground *ground)
     SDL_RenderCopy(view->renderer, ground->tex, &src, &dst);
   }
 }
+
+//==============================================================================

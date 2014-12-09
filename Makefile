@@ -1,7 +1,5 @@
 # vim: syntax=make:noet
 
-# TODO: properly make dependencies and so on
-
 GCC := gcc -g -Wall -O3
 LDD := -framework SDL2 -framework SDL2_image
 

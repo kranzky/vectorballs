@@ -1,12 +1,16 @@
 * ground
-  + fill the gaps
-    - sort by z before drawing
-    - calculate g for control points
   + change the numbers so they make more sense, ground at (0,0)
+    - perhaps 1 unit = 1mm or something like that
+    - make camera height explicit
+    - render with camera height of zero to get single line in centre
   + properly calculate width, draw full-width
+    - might require fov calculation?
     - calculate screen y and scaling factor for a given z
     - limit number of draw calls per raster line
     - fade out based on distance
+  + fill the gaps
+    - sort by z before drawing
+    - calculate g for control points
   + calculate slope, only draw +ve slope
     - brighten based on slope
   + hook up controller
