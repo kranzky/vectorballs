@@ -42,3 +42,7 @@
 * release build
   + support windows, linux and osx
   + package installer
+* debugger
+  + open a port for debugging
+  + configuration values as JSON
+  + write an external console in JS

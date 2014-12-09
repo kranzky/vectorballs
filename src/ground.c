@@ -59,15 +59,15 @@ vb_ground_free(VB_Ground *ground)
 void
 vb_ground_update(VB_Ground *ground)
 {
-  for (int i = 999; i >= 0; --i)
+  for (int i = DEPTH-1; i >= 0; --i)
   {
     int y = (int)(ground->points[i].height/(1.0+ground->points[i].z));
-    if (y <= -450 || y > 450)
+    if (y <= -HEIGHT/2 || y > HEIGHT/2)
     {
       continue;
     }
-    ground->raster[450-y].z = ground->points[i].z;
-    ground->raster[450-y].height = ground->points[i].height;
+    ground->raster[HEIGHT/2-y].z = ground->points[i].z;
+    ground->raster[HEIGHT/2-y].height = ground->points[i].height;
   }
 }
 
@@ -88,7 +88,7 @@ vb_ground_render(VB_View *view, VB_Ground *ground)
     dst.w = 100000 / ground->raster[y].z;
     src.x = 0;
     src.y = (int)ground->raster[y].z % 256;
-    dst.x = 800-dst.w/2.0;
+    dst.x = WIDTH/2-dst.w/2.0;
     dst.y = y;
     SDL_RenderCopy(view->renderer, ground->tex, &src, &dst);
   }

@@ -5,8 +5,8 @@
 
 //==============================================================================
 
-#define WIDTH 1600
-#define HEIGHT 900
+#define WIDTH 1024
+#define HEIGHT 576
 
 typedef struct
 {
