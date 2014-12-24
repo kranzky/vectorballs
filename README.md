@@ -1,3 +1,8 @@
+* clean up
+  + width/height should be restricted only to the view
+  + represent camera in world co-ordinates
+  + properly translate/project/scale
+  + divorce view from the window; should easily support multiple views
 * ground
   + change the numbers so they make more sense, ground at (0,0)
     - perhaps 1 unit = 1mm or something like that

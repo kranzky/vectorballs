@@ -1,5 +1,5 @@
-#ifndef  VB_GAME_H
-#define  VB_GAME_H
+#ifndef VB_GAME_H
+#define VB_GAME_H
 
 #include "ground.h"
 
